@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "News";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+}
+@using ChoQueVN.Models;
+@using ChoQueVN.Models.Entities;
+@using System.Linq;
+@* khai bao de su dung phan trang *@
+@using X.PagedList.Mvc.Core;
+@* khai bao kieu du lieu cua model *@
+@model X.PagedList.IPagedList<News>
+@using System.IO;
+@using X.PagedList.Mvc;
+@using X.PagedList.Mvc.Common;
+
+<section class="container-fluid">
+    <div class="row">
+        <h3 class="col-sm-10">
+            Danh sách tin tức
+        </h3>
+        <form action="/Admin/News/Addedit">
+            <input type="submit" class="btn btn-primary" value="Thêm tin tức" />
+        </form>
+    </div>
+    <div class="row form-group">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Hình ảnh</th>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Tác vụ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td class="text-sm-center">
+                            @*<img src="/wwwroot/Upload/ImageProducts/132431116896659945_GAMING_game_video_computer_gamer_poster_4592x2576.jpg" style="max-height:50px;max-width:50px;"/>*@
+                            @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImagesNews\\" + item.Image))
+                            {
+                                <img src="~/Upload/ImagesNews/@item.Image" style="max-height:50px;max-width:50px;" />
+                            }
+                        </td>
+                        <td>@item.Name</td>
+                        <td style="text-align:center;">
+                            <a href="/Admin/News/Addedit?id=@item.ID">Sửa</a>&nbsp;&nbsp;&nbsp;
+                            <a href="/Admin/News/Deletenews?id=@item.ID" onclick="Remove(this,@item.ID)">Xoá</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @* thuc hien phan trang *@
+        @* /User/Index?page=1,2,3... *@
+        @* Url.Action("ten action","ten controller", new { danhsachbien }) *@
+        @Html.PagedListPager(Model, page => Url.Action("News", "News", new { page }), new PagedListRenderOptions
+           {
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" }
+           })
+    </div>
+</section>
+
+<script>
+    var Remove = function (obj, id) {
+        //debugger
+        var host = window.location.host;
+        var name = obj.parentNode.parentNode.children[1].textContent;
+        if (window.confirm("Ban muon xoa " + name + " ?"))
+            window.location.href = host + "/Admin/User/Delele?id=" + id;
+    }
+</script>
+
+
+

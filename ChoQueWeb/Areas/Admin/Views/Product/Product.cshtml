@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+    int index = 1;
+}
+
+@using ChoQueVN.Models;
+@using ChoQueVN.Models.ViewModels;
+@using System.Linq;
+@* khai bao de su dung phan trang *@
+@using X.PagedList.Mvc.Core;
+@* khai bao kieu du lieu cua model *@
+@model X.PagedList.IPagedList<ProductVM>
+@using System.IO;
+@using X.PagedList.Mvc;
+@using X.PagedList.Mvc.Common;
+
+<section class="container-fluid">
+    <div class="row">
+        <input class="form-control col-sm-4" id="myInput" type="text"
+               placeholder="Tìm kiếm ...">
+    </div>
+    <div class="row">
+        <h3 class="col-sm-10">
+            Danh sách danh mục sản phẩm
+        </h3>
+        <form action="/Admin/Product/AddEdit">
+            <input type="submit" class="btn btn-primary" value="Thêm danh mục" />
+        </form>
+    </div>
+    <div class="row form-group" style="padding-top:10px">
+        <table class="table table-bordered table-striped">
+            <thead style="background-color:#34e9e9">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" class="text-sm-center">Ảnh</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Danh mục</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Giảm giá</th>
+                    <th scope="col" class="text-center">Sản phẩm hot</th>
+                    <th scope="col" class="text-center">Tác vụ</th>
+                </tr>
+            </thead>
+            <tbody id="#myTable">
+                @foreach (var item in Model)
+                    {
+                    <tr>
+                        <th scope="row">@index</th>
+                        <td class="text-sm-center">
+                            @*<img src="/wwwroot/Upload/ImageProducts/132431116896659945_GAMING_game_video_computer_gamer_poster_4592x2576.jpg" style="max-height:50px;max-width:50px;"/>*@
+                            @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImageProducts\\" + item.Image))
+                            {
+                                <img src="~/Upload/ImageProducts/@item.Image" style="max-height:50px;max-width:50px;" />
+                            }
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.CategoryName</td>
+                        <td>@Html.Raw(item.Description)</td>
+                        <td>@item.Price</td>
+                        <td>@item.Discount</td>
+                        <td class="text-center">
+                            <input type="checkbox" @if (item.Hot) { <text> checked</text> } disabled>
+                        </td>
+                        <td style="text-align:center;">
+                            <a href="/Admin/Product/AddEdit?id=@item.ID">Sửa</a>&nbsp;&nbsp;&nbsp;
+                            <a href="#" onclick="Remove(this,@item.ID)">Xoá</a>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            </tbody>
+        </table>
+        @* thuc hien phan trang *@
+        @* /User/Index?page=1,2,3... *@
+        @* Url.Action("ten action","ten controller", new { danhsachbien }) *@
+        @{
+            //lay bien key truyen tu url
+            string _key = Context.Request.Query["key"];
+        }
+        @Html.PagedListPager(Model, page => Url.Action("Product", "Product", new { page}), new PagedListRenderOptions
+           {
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" }
+           })
+    </div>
+</section>
+
+<script>
+    var Remove = function (obj, id) {
+        //debugger
+        var host = window.location.host;
+        var name = obj.parentElement.parentElement.children[2].textContent;
+        if (window.confirm("Ban muon xoa " + name + " ?"))
+            debugger
+            window.location.href = host + "/Admin/Product/Delele?id=" + id;
+    }
+
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+

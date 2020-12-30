@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "AddEdit";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+}
+
+    <section class="container-fluid">
+        <div class="row">
+            <h2>@ViewBag.Header</h2>
+        </div>
+        <form method="post" action="@ViewBag.FormAction" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="row form-group">
+                <label for="inputName" class="col-sm-2 col-form-label">Tên sản phẩm</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputName" name="Name" value="@if (Model != null) {<text>@Model.Name</text>}" placeholder="Tên sản phẩm" required>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="CategoryID" class="col-sm-2 col-form-label">Danh mục</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="CategoryID" name="CategoryID" required>
+                        <option value="0">---Danh mục---</option>
+                        @foreach (var item in ViewBag.Categories)
+                        {
+                            if (Model != null)
+                            {
+                                <option value="@item.ID" @if (Model.CategoryID == item.ID) { <text> selected</text> }>@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.ID">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="inputPrice" class="col-sm-2 col-form-label">Giá</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPrice" name="Price" value="@if (Model != null) {<text>@Model.Price</text>}" placeholder="Giá" required>
+                </div>
+            </div>
+            
+            <div class="row form-group">
+                <label for="inputDiscount" class="col-sm-2 col-form-label">Giảm giá</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputDiscount" name="Discount" value="@if (Model != null) {<text>@Model.Discount</text>}" placeholder="Giảm giá">
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="inputHot" class="col-sm-2 col-form-label">Sản phẩm nổi bật</label>
+                <div class="col-sm-10">
+                    <input type="checkbox" @if (Model != null && Model.Hot == true) { <text> checked</text> } name="Hot" id="Hot">
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Mô tả</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="inputDescription" name="Description" placeholder="Mô tả" required>@if (Model != null) {<text>@Model.Description</text>}</textarea>
+                    <script language="javascript">
+                        CKEDITOR.replace("Description");
+                    </script>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="inputContent" class="col-sm-2 col-form-label">Nội dung</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="inputContent" name="Content" placeholder="Nội dung" required>@if (Model != null) {<text>@Model.Content</text>}</textarea>
+                    <script language="javascript">
+                        CKEDITOR.replace("Content");
+                    </script>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="inputFile" class="col-sm-2 col-form-label">Nội dung</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" id="inputFile" name="formFile" >
+                </div>
+            </div>
+
+            @if (ViewBag.FormAction == "/Admin/Product/AddEditPost")
+            {
+                <input type="submit" value="Thêm sản phẩm" class="btn btn-secondary" />
+            }
+            else
+            {
+                <input type="submit" value="Sửa sản phẩm" class="btn btn-secondary" />
+            }
+
+        </form>
+    </section>
+

@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "AddEditCategory";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="container-fluid">
+    <div class="row">
+        <h2>@ViewBag.Header</h2>
+    </div>
+    <form method="post" action="@ViewBag.FormAction">
+        @Html.AntiForgeryToken()
+        <div class="row form-group">
+            <label for="inputName" class="col-sm-2 col-form-label">Tên danh mục</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputCategory" name="Category" placeholder="Tên danh mục" value="@if (Model != null) { <text>@Model.Name</text> }" required>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="ParentCategory" class="col-sm-2 col-form-label">Danh mục cha</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="ParentCategory" name="ParentID">
+                    <option value="0">---Danh mục cha---</option>
+                    @foreach (var item in ViewBag.Categories)
+                    {
+                        if (Model != null)
+                        {
+                            <option value="@item.ID" @if (Model.ParentID == item.ID) { <text> selected</text> }>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.ID">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        @if (ViewBag.FormAction == "/Admin/Product/AddEditCategoryPost")
+        {
+            <input type="submit" value="Thêm danh mục" class="btn btn-secondary" />
+        }
+        else
+        {
+            <input type="submit" value="Sửa danh mục" class="btn btn-secondary" />
+        }
+
+    </form>
+</section>
+

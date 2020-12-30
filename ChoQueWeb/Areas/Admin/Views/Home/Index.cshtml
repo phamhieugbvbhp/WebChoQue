@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+}
+    <div class="col-sm-12">
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tổng lượt người truy cập</th>
+                    <th scope="col">Tổng người đang online</th>
+                    <th scope="col">Sản phẩm bán chạy nhất</th>
+                    <th scope="col">Số lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@ViewBag.Visit</td>
+                    <td>@ViewBag.Online</td>
+                    <td>@ViewBag.BestBuy[0]</td>
+                    <td>@ViewBag.BestBuy[1]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

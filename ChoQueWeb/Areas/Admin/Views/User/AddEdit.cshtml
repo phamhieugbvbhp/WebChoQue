@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "AddEdit";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="container-fluid">
+    <div class="row">
+        <h2>@ViewBag.Header</h2>
+    </div>
+    <form method="post" action="@ViewBag.ActionForm">
+        @Html.AntiForgeryToken()
+        <div class="row form-group">
+            <label for="inputName" class="col-sm-2 col-form-label">Họ tên</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputName" name="Name" value="@if (Model != null) {<text>@Model.Name</text>}" placeholder="Họ tên" required>
+            </div>
+        </div>
+
+        <div class="row form-group" ">
+            <label for="inputAccount" class="col-sm-2 col-form-label">Tài khoản</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputAccount" name="Account" value="@if (Model != null) {<text>@Model.Account</text>}" placeholder="Tài khoản" required>
+            </div>
+        </div>
+
+        <div class="row form-group" ">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Mật khẩu</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword" name="Password" value="@if (Model != null) {<text>@Model.Password</text>}" placeholder="Mật khẩu" required>
+            </div>
+        </div>
+        @if (ViewBag.ActionForm == "/Admin/User/AddEditPost")
+        {
+            <input type="submit" value="Thêm" class="btn btn-secondary" />
+        }
+        else
+        {
+            <input type="submit" value="Sửa" class="btn btn-secondary"/>
+        }
+
+    </form>
+</section>
+

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+
+
+@{
+    ViewData["Title"] = "Danh sách hoá đơn";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+    @using ChoQueVN.Models;
+    @using ChoQueVN.Models.ViewModels;
+    @using System.Linq;
+    @* khai bao de su dung phan trang *@
+    @using X.PagedList.Mvc.Core;
+    @* khai bao kieu du lieu cua model *@
+    @model X.PagedList.IPagedList<BillsVM>
+    @using X.PagedList.Mvc.Common;
+}
+<section class="container-fluid">
+    <div class="row">
+        <h3 class="col-sm-10">
+            Danh sách tài khoản
+        </h3>
+        <form action="/Admin/User/AddEdit">
+            <input type="submit" class="btn btn-primary" value="Thêm tài khoản" />
+        </form>
+    </div>
+    <div class="row form-group">
+        <table class="table table-striped">
+            <thead style="background-color:#34e9e9">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Khách hàng</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Sản phẩm</th>
+                    @*<th scope="col" class="text-center">Tác vụ</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>@item.NameCus</td>
+                        <td>@item.Email</td>
+                        <td>@item.Address</td>
+                        <td>@item.Phone</td>
+                        <td>@item.NameProduct</td>
+                        @*<td style="text-align:center;">
+                            <a href="/Admin/Bills/AddEdit?id=@item.ID">Sửa</a>&nbsp;&nbsp;&nbsp;
+                            <a href="#" onclick="Remove(this,@item.ID)">Xoá</a>
+                        </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @* thuc hien phan trang *@
+        @* /User/Index?page=1,2,3... *@
+        @* Url.Action("ten action","ten controller", new { danhsachbien }) *@
+        @{
+            //lay bien key truyen tu url
+            string _key = Context.Request.Query["key"];
+        }
+        @Html.PagedListPager(Model, page => Url.Action("Index", "Bills", new { page }), new PagedListRenderOptions
+           {
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" }
+           })
+    </div>
+</section>
+
+<script>
+    var Remove = function (obj, id) {
+        //debugger
+        var host = window.location.host;
+        var name = obj.parentNode.parentNode.children[1].textContent;
+        if (window.confirm("Ban muon xoa " + name + " ?"))
+            window.location.href = host + "/Admin/User/Delele?id=" + id;
+    }
+</script>
+
+
+

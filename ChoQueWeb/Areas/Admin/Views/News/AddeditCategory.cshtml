@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "AddeditCategory";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section class="container-fluid">
+    <div class="row">
+        <h2>@ViewBag.Header</h2>
+    </div>
+    <form method="post" action="@ViewBag.ActionForm">
+        @Html.AntiForgeryToken()
+        <div class="row form-group">
+            <label for="inputName" class="col-sm-2 col-form-label">Tên danh mục</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputCategory" name="Category" placeholder="Tên danh mục" value="@if (Model != null) { <text>@Model.Name</text> }" required>
+            </div>
+        </div>
+        @if (ViewBag.ActionForm == "/Admin/News/AddeditCategorypost")
+        {
+            <input type="submit" value="Thêm danh mục" class="btn btn-secondary" />
+        }
+        else
+        {
+            <input type="submit" value="Sửa danh mục" class="btn btn-secondary" />
+        }
+
+    </form>
+</section>
+
+
+

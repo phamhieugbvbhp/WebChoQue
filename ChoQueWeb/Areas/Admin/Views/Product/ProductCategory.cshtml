@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "Danh mục sản phẩm";
+    Layout = "~/Areas/Admin/Views/_Shared/_LayoutAdmin.cshtml";
+}
+@using ChoQueVN.Models;
+@using ChoQueVN.Models.ViewModels;
+@using System.Linq;
+@* khai bao de su dung phan trang *@
+@using X.PagedList.Mvc.Core;
+@* khai bao kieu du lieu cua model *@
+@model X.PagedList.IPagedList<CategoryProductVM>
+@using X.PagedList.Mvc.Common;
+
+<section class="container-fluid">
+    <div class="row">
+        <h3 class="col-sm-10">
+            Danh sách danh mục sản phẩm
+        </h3>
+        <form action="/Admin/Product/AddEditCategory">
+            <input type="submit" class="btn btn-primary" value="Thêm danh mục" />
+        </form>
+    </div>
+    <div class="row form-group" style="padding-top:10px">
+        <table class="table table-striped">
+            <thead style="background-color:#34e9e9">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Danh mục</th>
+                    <th scope="col">Danh mục cha</th>
+                    <th scope="col" class="text-center">Tác vụ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.ID</th>
+                        <td>@item.Name</td>
+                        <td>@item.ParentName</td>
+                        <td style="text-align:center;">
+                            <a href="/Admin/Product/AddEditCategory?id=@item.ID">Sửa</a>&nbsp;&nbsp;&nbsp;
+                            <a href="#" onclick="Remove(this,@item.ID)">Xoá</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @* thuc hien phan trang *@
+        @* /User/Index?page=1,2,3... *@
+        @* Url.Action("ten action","ten controller", new { danhsachbien }) *@
+        @{
+            //lay bien key truyen tu url
+            string _key = Context.Request.Query["key"];
+        }
+        @Html.PagedListPager(Model, page => Url.Action("ProductCategory", "Product", new { page }), new PagedListRenderOptions
+           {
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" }
+           })
+    </div>
+</section>
+
+<script>
+    var Remove = function (obj, id) {
+        //debugger
+        var host = window.location.host;
+        var name = obj.parentNode.parentNode.children[1].textContent;
+        if (window.confirm("Ban muon xoa danh muc " + name + " ?"))
+            window.location.href = host + "/Admin/Product/DeleteCategory?id=" + id;
+    }
+</script>
+
