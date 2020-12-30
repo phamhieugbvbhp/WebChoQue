@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+@using System.IO;
+    <div class="content-bot">
+        <div class="tm-left-ct" style="font-size:14px">
+            <div class="tm-tree-hot">
+                <div style="float:left;margin-bottom:10px">
+                    <h3 class="tm-title">Sản phẩm tìm kiếm</h3>
+                    <!--<div class="row">
+                 <div class="col-xs-6"><a title="cách làm mứt dừa màu xanh" href="http://choquevn.com/cach-lam-mut-dua-mau-xanh-bot-la-dua-4258"><img alt="cách làm mứt dừa màu xanh" style="margin:auto;margin-bottom:10px" class="img-responsive" src="/themes/images/cach-lam-mut-dua-mau-xanh.jpg"/></a></div>
+                 <div class="col-xs-6"><a title="bột lá nếp" href="http://mauthucphamtunhien.com/san-pham/bot-la-nep-bot-la-dua-nguyen-chat-tu-nhien.html"><img alt="bột lá nếp" style="margin:auto;margin-bottom:10px" class="img-responsive" src="/themes/images/bot-la-nep-la-dua-nguyen-chat-choque.gif"/></a></div>
+                </div>-->
+                    <ul class="list-tree">
+
+                        @foreach (var item in ViewBag.sProducts)
+                        {
+                            <li style="height:258px;">
+                                <div class="detail">
+                                    <a href="/Product/Detail/@item.ID" title="@item.Name" class="img">
+                                        @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImageProducts\\" + item.Image))
+                                        {
+                                            <img src="~/Upload/ImageProducts/@item.Image" class="w-100 img-thumbnail" style="max-width:190px;height:120px;border:0px" />
+                                        }
+                                    </a>
+                                    <h4><a href="/Product/Detail/@item.ID" title="@item.Name"><strong>@item.Name</strong></a></h4>
+                                    <span class="cart-price2">@item.Discount₫</span>  <span class="priceold2">@item.Price₫</span>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                
+            </div>
+            <!-- end tm-tree-hot -->
+        </div>
+
+    </div>
+

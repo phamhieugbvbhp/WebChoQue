@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+@using System.IO;
+
+<div class="content-bot">
+    <div class="tm-left-ct" style="font-size:14px">
+        <div class="tm-tree-hot">
+            <div style="float:left;margin-bottom:10px">
+                <ul class="list-tag">
+                    <li><a href="/Product/index/1" title="bột lá nếp">Bột lá nếp(lá dứa)</a></li>
+                    <li><a href="/Product/index/16" title="bột củ dền">Bột củ dền</a></li>
+                    <li><a href="/Product/index/2" title="Bột lá tím cẩm đỏ">Bột lá tím cẩm đỏ</a></li>
+                    <li><a href="/Product/index/4" title="HOa đậu biếc">Hoa đậu biếc</a></li>
+                    <li><a href="/Product/index/15" title="Bột dành dành">Bột dành dành</a></li>
+                </ul>
+                <h3 class="tm-title">SẢN PHẨM NỔI BÂT</h3>
+                <!--<div class="row">
+                 <div class="col-xs-6"><a title="cách làm mứt dừa màu xanh" href="http://choquevn.com/cach-lam-mut-dua-mau-xanh-bot-la-dua-4258"><img alt="cách làm mứt dừa màu xanh" style="margin:auto;margin-bottom:10px" class="img-responsive" src="/themes/images/cach-lam-mut-dua-mau-xanh.jpg"/></a></div>
+                 <div class="col-xs-6"><a title="bột lá nếp" href="http://mauthucphamtunhien.com/san-pham/bot-la-nep-bot-la-dua-nguyen-chat-tu-nhien.html"><img alt="bột lá nếp" style="margin:auto;margin-bottom:10px" class="img-responsive" src="/themes/images/bot-la-nep-la-dua-nguyen-chat-choque.gif"/></a></div>
+                </div>-->
+                <ul class="list-tree">
+
+                    @foreach (var item in ViewBag.hotProducts)
+                    {
+                        <li style="height:258px;">
+                            <div class="detail">
+                                <a href="/Product/Detail/@item.ID" title="@item.Name" class="img">
+                                    @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImageProducts\\" + item.Image))
+                                    {
+                                        <img src="~/Upload/ImageProducts/@item.Image" class="w-100 img-thumbnail" style="max-width:190px;height:120px;border:0px" />
+                                    }
+                                </a>
+                                <h4><a href="/Product/Detail/@item.ID" title="@item.Name"><strong>@item.Name</strong></a></h4>
+                                <span class="cart-price2">@item.Discount₫</span>  <span class="priceold2">@item.Price₫</span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <a href="http://choquevn.com/ban-bot-la-khuc-nguyen-chat-100-dam-bao-vsattp-4202" title="bột lá khúc"><img alt="bột lá khúc" src="~/ChoQueVN/bot-la-khuc-kho-nguyen-chat.gif"></a>
+            <div class="clear" style="margin-bottom:25px"></div>
+            <h3 class="tm-title">SẢN PHẨM ĐỒ UỐNG &amp; GIẢM CÂN</h3>
+            <ul class="list-tree">
+                @foreach (var item in ViewBag.Products10)
+                {
+                    <li style="height:258px;">
+                        <div class="detail">
+                            <a href="/Product/Detail/@item.ID" title="@item.Name" class="img">
+                                @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImageProducts\\" + item.Image))
+                                {
+                                    <img src="~/Upload/ImageProducts/@item.Image" class="w-100 img-thumbnail" style="max-width:190px;height:120px;border:0px" />
+                                }
+                            </a>
+                            <h4><a href="/Product/Detail/@item.ID" title="@item.Name"><strong>@item.Name</strong></a></h4>
+                            <span class="cart-price2">@item.Discount₫</span>  <span class="priceold2">@item.Price₫</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div class="clear"></div>
+            <h3 class="tm-title">THỰC DƯỠNG &amp; ĂN CHAY</h3>
+            <ul class="list-tree">
+                @foreach (var item in ViewBag.Products11)
+                {
+                    <li style="height:258px;">
+                        <div class="detail">
+                            <a href="/Product/Detail/@item.ID" title="@item.Name" class="img">
+                                @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImageProducts\\" + item.Image))
+                                {
+                                    <img src="~/Upload/ImageProducts/@item.Image" class="w-100 img-thumbnail" style="max-width:190px;height:120px;border:0px" />
+                                }
+                            </a>
+                            <h4><a href="/Product/Detail/@item.ID" title="@item.Name"><strong>@item.Name</strong></a></h4>
+                            <span class="cart-price2">@item.Discount₫</span>  <span class="priceold2">@item.Price₫</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div class="clear"></div>
+            <h3 class="tm-title">HẠT DINH DƯỠNG</h3>
+            <ul class="list-tree">
+                @foreach (var item in ViewBag.Products12)
+                {
+                    <li style="height:258px;">
+                        <div class="detail">
+                            <a href="/Product/Detail/@item.ID" title="@item.Name" class="img">
+                                @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImageProducts\\" + item.Image))
+                                {
+                                    <img src="~/Upload/ImageProducts/@item.Image" class="w-100 img-thumbnail" style="max-width:190px;height:120px;border:0px" />
+                                }
+                            </a>
+                            <h4><a href="/Product/Detail/@item.ID" title="@item.Name"><strong>@item.Name</strong></a></h4>
+                            <span class="cart-price2">@item.Discount₫</span>  <span class="priceold2">@item.Price₫</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div class="view-all-">
+                <a href="http://choquevn.com/danh-muc-san-pham/-140" title="xem tất cả">xem tất cả</a>
+            </div>
+            <!-- end view-all- -->
+        </div>
+        <!-- end tm-tree-hot -->
+    </div>
+
+    </div>

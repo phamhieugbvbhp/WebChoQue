@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+@using System.IO;
+
+    <div class="tm-left-ct">
+        <div class="title short" style="position: relative; left: 10px">
+
+            <div class="breadcrumb">
+                <span>
+                    @if (@ViewBag.tit.Name != null)
+                    {
+                        <a title="trang chủ" href="/">Trang chủ</a>
+                        <text>&nbsp;»&nbsp;</text><a href="#" title="@ViewBag.tit.Name">@ViewBag.tit.Name</a>
+                    }
+                    else
+                    {
+                        <a title="trang chủ" href="/">Trang chủ</a>
+                    }
+                </span>
+            </div>
+
+        </div>
+        <div class="list-group">
+            @foreach (var item in ViewBag.listNews)
+            {
+                <div class="col-md-6" style="margin-bottom: 80px">
+                    <div class="col-xs-12" style="background-color: #eaf8d2;">
+                        <a title="@item.Name" href="/news/detail/@item.ID"><strong>@item.Name</strong></a>
+                        <br>
+                        <div class="col-xs-5">
+                            <a title="@item.Name" href="/news/detail/@item.ID">
+                                <strong>
+                                    @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImagesNews\\" + item.Image))
+                                    {
+                                        <img class="css-img-dt" alt="@item.Name" src="~/Upload/ImageNews/item.Image">
+                                    }
+                                    </strong>
+                            </a>
+                        </div>
+                        @Html.Raw(item.Description)
+                        »<a title="@item.Name" href="/news/detail/@item.ID"><strong>Xem chi tiết</strong></a>
+                    </div>
+                    @*<p><span>»</span> <a title="Hướng dẫn làm thạch rau câu bột lá nếp - lá dứa" href="/huong-dan-lam-thach-rau-cau-bot-la-nep-la-dua-4253">Hướng dẫn làm thạch rau câu bột lá nếp - lá dứa</a></p>
+                <p><span>»</span> <a title="Hướng dẫn làm mứt dừa lá nếp - lá dứa" href="/huong-dan-lam-mut-dua-la-nep-la-dua-4252">Hướng dẫn làm mứt dừa lá nếp - lá dứa</a></p>
+                <p><span>»</span> <a title="Hướng dẫn làm bánh trôi nước với bột lá nếp - lá dứa" href="/huong-dan-lam-banh-troi-nuoc-voi-bot-la-nep-la-dua-4251">Hướng dẫn làm bánh trôi nước với bột lá nếp - lá dứa</a></p>*@
+                </div>
+            }
+            @*<div class="col-md-6" style="margin-bottom: 80px">
+            <div class="col-xs-12" style="background-color: #eaf8d2;">
+                <a title="5 món ngon từ bột lá dứa" href="/5-mon-ngon-tu-bot-la-dua-4078"><strong>5 món ngon từ bột lá dứa</strong></a>
+                <br>
+                <div class="col-xs-5">
+                    <a title="5 món ngon từ bột lá dứa" href="/5-mon-ngon-tu-bot-la-dua-4078">
+                        <strong>
+                            <img class="css-img-dt" alt="5 món ngon từ bột lá dứa" src="http://choquevn.com/upload/files/BOT LA NEP/636332970082916144.png">
+                        </strong>
+                    </a>
+                </div>
+
+                Bột lá dứa có thể sử dụng làm đổi màu sắc tự nhiền của nhiều món ăn, sau đây Chợ Quê xin giới thiệu đến các bạn tổng hợp 5 món ă ...
+                »<a title="5 món ngon từ bột lá dứa" href="/5-mon-ngon-tu-bot-la-dua-4078"><strong>Xem chi tiết</strong></a>
+                <p>Danh mục: <a href="/mon-ngon-moi-ngay/-2225" title="Món ngon mỗi ngày" style="color:#1c7504"><strong>Món ngon mỗi ngày</strong></a></p>
+            </div>
+            <p><span>»</span> <a title="Món ngon từ gấc cho mâm cơm cuối tuần" href="/mon-ngon-tu-gac-cho-mam-com-cuoi-tuan-4005">Món ngon từ gấc cho mâm cơm cuối tuần</a></p>
+            <p><span>»</span> <a title="3 món canh từ củ sen giúp tăng cường sinh lực" href="/3-mon-canh-tu-cu-sen-giup-tang-cuong-sinh-luc-3977">3 món canh từ củ sen giúp tăng cường sinh lực</a></p>
+            <p><span>»</span> <a title="Gà sốt hạnh nhân, món ăn tuyệt vời cho cả gia đình" href="/ga-sot-hanh-nhan-mon-an-tuyet-voi-cho-ca-gia-dinh-3972">Gà sốt hạnh nhân, món ăn tuyệt vời cho cả gia đình</a></p>
+        </div>*@
+
+            <div class="col-md-6" style="margin-bottom: 80px">
+            </div>
+            <div class="col-md-6" style="margin-bottom: 80px">
+            </div>
+        </div>
+
+    </div>
+

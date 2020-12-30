@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+
+    <div class="tm-left-ct">
+        <div class="title short" style="position: relative; left: 10px">
+
+            <div class="breadcrumb">
+                <span>
+                    <a title="trang chủ" href="/">Trang chủ</a>
+                </span>
+            </div>
+
+        </div>
+        <div class="tm-tree-hot">
+            <ul class="list-tag">
+                <li><a href="#">Bột lá nếp</a></li>
+                <li><a href="#" title="Bột gấc khô">Bột gấc khô</a></li>
+                <li><a href="#">Tinh bột nghệ</a></li>
+                <li><a href="#">Bột lá cẩm</a></li>
+            </ul>
+            <h3 class="tm-title">@ViewBag.item.Name</h3>
+            <h1 style="font-weight: bold; font-size: 12pt; margin-bottom: 5px">@ViewBag.item.Name</h1>
+            <br>
+            @Html.Raw(@ViewBag.item.Content)
+
+            <br>
+            <div class="subcriblenow-home">
+                <div class="row">
+                </div>
+                <div class="row" style="margin: auto">
+                    <p><b>CÔNG TY CỔ PHẦN CHỢ QUÊ VIỆT NAM</b></p>
+                    <div class="col-sm-6" style="padding: 0px!important">
+                        <i class="fa fa-map-marker" style="font-size: 15pt"></i><span><b>11 Ngõ 60 Nhân Hòa - Q.Thanh Xuân - Tp.Hà Nội</b></span>
+                        <br>
+                        <a href="tel:0963274216" title="tư vấn Thúy"><i class="fa fa-phone-square" style="font-size: 15pt"></i><span style="text-align: left">Ms.Lan: 0963.274.216</span></a>
+                        <br>
+                        <a href="tel:0915434189" title="tư vấn Thúy"><i class="fa fa-phone-square" style="font-size: 15pt"></i><span style="text-align: left">Ms.Thúy: 0915.434.189</span></a>
+                    </div>
+                    <div class="col-sm-6" style="padding: 0px!important">
+                        <i class="fa fa-map-marker" style="font-size: 15pt"></i><span style="text-align: left"><b>243/32/7 Hoàng Diệu P.4 Quận 4 - Tp.HCM</b></span>
+                        <br>
+                        <i class="fa fa-map-marker" style="font-size: 15pt"></i><span style="text-align: left"><b>385/5 Lê Văn Sỹ P.2 Quận Tân Bình TP.HCM</b></span>
+                        <br>
+                        <a href="tel:0915731468" title="tư vấn Phương"><i class="fa fa-phone" style="font-size: 15pt"></i><span>Ms.Phương: 0915.731.468</span></a>
+                        <br>
+                        <a href="tel:0984845724" title="tư vấn hằng"><i class="fa fa-phone" style="font-size: 15pt"></i><span>Ms.Hằng: 0984.845.724</span></a>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="clear"></div>
+            <br>
+            <!-- end view-all- -->
+        </div>
+    </div>
+

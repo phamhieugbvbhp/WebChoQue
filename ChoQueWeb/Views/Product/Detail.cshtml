@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+@using System.IO;
+<div class="tm-left-ct">
+    <div class="title short" style="position: relative; left: 10px">
+
+        <div class="breadcrumb">
+            <span>
+
+                <a title="trang chủ" href="/">Trang chủ</a>
+                @if (ViewBag.tit != null)
+                {
+                    <text>>></text> <a href="#" title="@ViewBag.tit.ParentName">@ViewBag.tit.ParentName</a> <text>>></text>
+                    <a href="#" title="@ViewBag.tit.Name">@ViewBag.tit.Name</a> <text>>></text>
+                    <a href="#" title="@ViewBag.item">@ViewBag.item.Name</a>
+                }
+            </span>
+        </div>
+
+    </div>
+    <link rel="stylesheet" type="text/css" href="../css/admin/koolbox/theme.css">
+
+
+
+
+
+    <div class="tm-tree-hot">
+        @*<ul class="list-tag">
+                <li><a href="http://choquevn.com/quy-trinh-lam-bot-la-nep-bot-la-dua-4058">Bột lá nếp</a></li>
+                <li><a href="http://choquevn.com/quy-trinh-lam-bot-gac-don-gian-dam-bao-chung-nhan-vsattp-4061" title="Bột gấc khô">Bột gấc khô</a></li>
+                <li><a href="/tinh-bot-nghe-cong-dung-than-ky-doi-voi-phu-nu-sau-khi-sinh-3844">Tinh bột nghệ</a></li>
+                <li><a href="/bot-la-cam-co-tac-dung-gi-3499">Bột lá cẩm</a></li>
+                <li class="tm-show"><a href="http://choquevn.com/danh-muc-san-pham/-140" title="Xem tất cả">Xem nhiều hơn</a></li>
+            </ul>*@
+        <h3 class="tm-title">@ViewBag.item.Name</h3>
+        <div class="row">
+            <p style="clear: both">
+            </p><div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
+                <div style="border: solid 1px #ececec">
+                    @if (System.IO.File.Exists(Directory.GetCurrentDirectory() + "\\wwwroot\\Upload\\ImageProducts\\" + ViewBag.item.Image))
+                    {
+                        <img alt="@ViewBag.item.Name" src="~/Upload/ImageProducts/@ViewBag.item.Image" style="width:100%;max-height:350px;overflow:hidden">
+                    }
+                </div>
+                <br>
+                <br>
+            </div>
+            <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
+                <div class="all-cart">
+                    <div class="descriptions-top">
+                        <p><a style="font-size:13pt;text-transform:uppercase" href="#" title="@ViewBag.item.Name">@ViewBag.item.Name</a> </p>
+                    </div>
+                    <p><span style="font-size: 12pt">Giá khuyến Mãi:</span><span class="cart-price">@ViewBag.item.Discount₫</span> <span class="priceold">Giá cũ: @ViewBag.item.Price₫</span></p>
+                    <p><i class="fa fa-truck" style="font-size: 15pt"></i>Giao hàng tại nhà <i class="fa fa-exchange" style="font-size: 15pt"></i>Giao trên toàn quốc</p>
+
+                    <form action="/Product/Buy/@ViewBag.item.ID" method="post" class="ajax">
+                        <div class="box-shop">
+                            <p style="margin: 10px 0px 10px 0px;"><b style="color: #00951d; font-size: 22px;">ĐẶT MUA SẢN PHẨM</b></p>
+                            <div class="row">
+                                <div class="col-sm-5 col-md-6">
+                                    <input id="Name" class="text-box" required="required" placeholder="Tên người nhận (người đặt hàng)*" type="text" name="Name">
+                                </div>
+                                <div class="col-sm-5 col-md-6">
+                                    <input id="Address" class="text-box" required="required" placeholder="Địa chỉ người nhận hàng*" type="text" name="Address">
+                                </div>
+                                <div class="col-sm-5 col-md-6">
+                                    <input id="Phone" class="text-box" required="required" placeholder="Điện thoại nhận hàng*" type="text" name="Phone">
+                                </div>
+                                <div class="col-sm-5 col-md-6">
+                                    <input id="Email" class="text-box" placeholder="Email*" type="text" name="Email">
+                                </div>
+                                <div class="col-sm-5 col-md-6">
+                                    <input id="Product" class="hidden text-box" type="text" value="@ViewBag.item.ID" name="Product">
+                                </div>
+                            </div>
+
+                            <input type="submit" class="button " id="Buys" value="Đặt mua"><span style="margin-left: 20px"><i class="fa fa-phone" style="font-size: 18pt"></i>037.849.1006</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="descriptions">* Bạn có những thắc mắc liên quan về công dụng cách dùng sản phẩm? Bạn có thể liên hệ trực tiếp chúng tôi để được giải đáp chi tiết nhất! </div>
+            </div>
+        </div>
+        <br>
+
+        <br>
+        @Html.Raw(ViewBag.item.Content)
+        <br>
+        <div class="subcriblenow-home">
+            <div class="row">
+            </div>
+            <div class="row" style="margin: auto">
+                <p><b>CÔNG TY CỔ PHẦN CHỢ QUÊ VIỆT NAM</b></p>
+                <div class="col-sm-6" style="padding: 0px!important">
+                    <i class="fa fa-map-marker" style="font-size: 15pt"></i><span><b>11 Ngõ 60 Nhân Hòa - Q.Thanh Xuân - Tp.Hà Nội</b></span>
+                    <br>
+                    <a href="tel:0963274216" title="tư vấn Thúy"><i class="fa fa-phone-square" style="font-size: 15pt"></i><span style="text-align: left">Ms.Lan: 0963.274.216</span></a>
+                    <br>
+                    <a href="tel:0915434189" title="tư vấn Thúy"><i class="fa fa-phone-square" style="font-size: 15pt"></i><span style="text-align: left">Ms.Thúy: 0915.434.189</span></a>
+                </div>
+                <div class="col-sm-6" style="padding: 0px!important">
+                    <i class="fa fa-map-marker" style="font-size: 15pt"></i><span style="text-align: left"><b>243/32/7 Hoàng Diệu P.4 Quận 4 - Tp.HCM</b></span>
+                    <br>
+                    <i class="fa fa-map-marker" style="font-size: 15pt"></i><span style="text-align: left"><b>385/5 Lê Văn Sỹ P.2 Quận Tân Bình TP.HCM</b></span>
+                    <br>
+                    <a href="tel:0915731468" title="tư vấn Phương"><i class="fa fa-phone" style="font-size: 15pt"></i><span>Ms.Phương: 0915.731.468</span></a>
+                    <br>
+                    <a href="tel:0984845724" title="tư vấn hằng"><i class="fa fa-phone" style="font-size: 15pt"></i><span>Ms.Hằng: 0984.845.724</span></a>
+                </div>
+            </div>
+        </div>
+        <br>
+<div class="clear"></div>
+        <br>
+
+        <!-- end view-all- -->
+    </div>
+</div>
+
